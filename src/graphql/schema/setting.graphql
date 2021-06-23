@@ -1,0 +1,61 @@
+type Setting {
+  id: ID!
+  companies: [Company]
+  author: Author!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  title: String!
+  businessId: String!
+  businessType: String!
+  logo: String
+  industry: String
+  contact: String
+  email: String
+  phone: String
+  website: String
+  address: Address
+  parent: String
+  children: String
+  status: String
+}
+
+input inputCompany {
+  name: String
+  title: String
+  businessId: String
+  businessType: String
+  logo: String
+  industry: String
+  contact: String
+  email: String
+  phone: String
+  website: String
+  address: AddressInput
+  parent: String
+  status: StatusEnum
+}
+
+type Author {
+  name: String!
+  description: String
+  email: String
+  website: String
+  phone: String
+  address: Address
+  socials: Social
+}
+
+type Query {
+  settings: Setting!
+  company(id: ID!): Company!
+  companies: [Company]!
+}
+
+type Mutation {
+  createCompany(input: inputCompany!): Company!
+  updateCompany(id: ID!, input: inputCompany): Company!
+  deleteCompany(id: ID!): [Company]!
+}

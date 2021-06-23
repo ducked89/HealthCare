@@ -1,0 +1,33 @@
+scalar Date
+
+enum RoleEnum {
+  ADMIN
+  USER
+  OWNER
+  SUPPORT
+  MANAGER
+}
+
+enum IdentificationEnum {
+  NIF
+  CIN
+  PASSPORT
+  QUITUS
+  PATENTE
+  NIN
+  DRIVER_ID
+  OTHER
+}
+
+enum StatusEnum {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+  PENDING
+  FINISHED
+}
+
+enum OrientationEnum {
+  LANDSCAPE
+  PORTRAIT
+}

@@ -9,26 +9,31 @@ module.exports = {
       input.id = v4();
       const newCompany = { ...input };
 
-      settings.companies.push(newCompany);
+      settings[0].companies.push(newCompany);
 
       return newCompany;
     },
     updateCompany: (parent, { id, input }, ctx) => {
-      const indexCompany = settings.companies.findIndex(
+      const indexCompany = settings[0].companies.findIndex(
         (company) => company.id === id
       );
-      const company = settings.companies[indexCompany];
-      settings.companies[indexCompany] = { ...company, ...input };
+      const company = settings[0].companies[indexCompany];
+      settings[0].companies[indexCompany] = { ...company, ...input };
 
-      return settings.companies[indexCompany];
+      return settings[0].companies[indexCompany];
     },
     deleteCompany: (parent, { id }, ctx) => {
-      const indexComp = settings.companies.findIndex(
+      const indexComp = settings[0].companies.findIndex(
         (company) => company.id === id
       );
 
-      const removed = settings.companies.splice(indexComp, 1);
+      const removed = settings[0].companies.splice(indexComp, 1);
       return removed;
+    },
+    resetApp: () => {
+      settings.length = 0;
+      if (settings.length === 0) return true;
+      return false;
     },
   },
 };

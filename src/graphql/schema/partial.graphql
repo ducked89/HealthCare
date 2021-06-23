@@ -1,0 +1,43 @@
+type Address {
+  street: String
+  city: String
+  postal: String
+  state: String
+  country: String
+}
+
+input AddressInput {
+  street: String
+  city: String
+  postal: String
+  state: String
+  country: String
+}
+
+type Social {
+  youtube: String
+  facebook: String
+  twitter: String
+  instagram: String
+  linkedin: String
+  github: String
+}
+
+input SocialInput {
+  youtube: String
+  facebook: String
+  twitter: String
+  instagram: String
+  linkedin: String
+  github: String
+}
+
+type Identification {
+  name: IdentificationEnum!
+  code: String!
+}
+
+input IdentificationInput {
+  name: IdentificationEnum!
+  code: String!
+}

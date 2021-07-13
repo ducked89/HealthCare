@@ -1,0 +1,46 @@
+type Company {
+  id: ID!
+  name: String!
+  title: String!
+  businessId: String!
+  businessType: String!
+  logo: String
+  industry: String
+  contact: String
+  email: String
+  phone: String
+  website: String
+  address: Address
+  parent: ID
+  children: [ID]
+  status: String
+}
+
+input inputCompany {
+  name: String
+  title: String
+  businessId: String
+  businessType: String
+  logo: String
+  industry: String
+  contact: String
+  email: String
+  phone: String
+  website: String
+  address: AddressInput
+  parent: String
+  status: StatusEnum
+}
+
+type Query {
+  company(id: ID!): Company
+  companies: [Company]!
+}
+
+type Mutation {
+  createCompany(input: inputCompany!): Company!
+  updateCompany(id: ID!, input: inputCompany): Company!
+  deleteCompany(id: ID!): Company!
+  addParent(parent: ID!, child: ID!): Boolean!
+  removeParent(parent: ID!, child: ID!): Boolean!
+}

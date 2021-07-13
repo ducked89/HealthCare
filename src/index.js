@@ -8,6 +8,12 @@ const { ApolloServer, gql } = require("apollo-server");
 const resolvers = require("./graphql/resolvers");
 const typeDefs = require("./graphql/schema");
 
+// Get database connection
+const { connectDb } = require("./database");
+
+// Load all models
+const models = require("./database/models");
+
 // Instance of express
 const app = express();
 
@@ -18,9 +24,30 @@ const PORT = process.env.PORT || process.env.APP_PORT;
 app.use(cors());
 app.use(morgan("dev"));
 
-const server = new ApolloServer({ introspection: true, typeDefs, resolvers });
+// Create Apollo server
+const server = new ApolloServer({
+  introspection: true,
+  typeDefs,
+  resolvers,
+  formatError: (error) => {
+    const message = error.message
+      .replace("SequelizeValidationError: ", "")
+      .replace("Validation error: ", "");
+
+    return {
+      ...error,
+      message,
+    };
+  },
+  context: async ({ req, connection }) => {
+    return { req, connection, models };
+  },
+});
 
 // The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+connectDb().then(async () => {
+  console.log("Mongodb running up!");
+  server.listen({ port: PORT }).then(({ url }) => {
+    console.log(`🚀  Apollo Server on http://localhost:${PORT}/`);
+  });
 });

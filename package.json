@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -e js, graph, env -w .env babel-node src/index.js"
+    "dev": "nodemon -L -e js, graph, env -w .env babel-node src/index.js"
   },
   "repository": {
     "type": "git",
